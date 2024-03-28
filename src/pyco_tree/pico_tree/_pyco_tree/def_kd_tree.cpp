@@ -246,7 +246,15 @@ store the result in the specified output.
           static_cast<Neighborhoods (KdTree::*)(py::array_t<Scalar, 0> const)
                           const>(&KdTree::SearchBox),
           py::arg("boxes").noconvert().none(false),
-          "Search for all points within each of the axis aligned input boxes.");
+          "Search for all points within each of the axis aligned input boxes.")
+      .def(
+        "save",
+        &KdTree::save
+      )
+      .def(
+        "load",
+        &KdTree::load
+      );
 }
 
 void DefKdTree(py::module& m) {

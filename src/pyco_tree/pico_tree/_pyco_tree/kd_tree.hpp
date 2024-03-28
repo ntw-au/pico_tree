@@ -177,6 +177,14 @@ class KdTree : public pico_tree::KdTree<Space_, Metric_> {
 
   inline ScalarType metric(ScalarType v) const { return metric()(v); }
 
+  void save(std::string const& filename) const {
+    Base::Save(*this, filename);
+  }
+
+  static KdTree load(py::array_t<ScalarType, 0> pts, std::string const& filename) {
+    return KdTree(Base::Load(MakeMap<Dim>(pts), filename));
+  }
+
  private:
   void EnsureSize(
       Space const& query,
@@ -197,6 +205,9 @@ class KdTree : public pico_tree::KdTree<Space_, Metric_> {
       }
     }
   }
+
+  KdTree(Base base)
+      : Base(std::move(base)) {}
 };
 
 }  // namespace pyco_tree
