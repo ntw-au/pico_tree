@@ -251,7 +251,7 @@ store the result in the specified output.
         "save",
         &KdTree::save
       )
-      .def(
+      .def_static(
         "load",
         &KdTree::load
       );
